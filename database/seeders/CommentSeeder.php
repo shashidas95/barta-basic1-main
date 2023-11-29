@@ -2,11 +2,12 @@
 
 namespace Database\Seeders;
 
+use App\Models\Comment;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-class PostSeeder extends Seeder
+class CommentSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,26 +15,23 @@ class PostSeeder extends Seeder
     public function run(): void
     {
 
-
-        // Clear existing data from the posts table
-       // DB::table('posts')->truncate();
+        // Clear existing data from the comments table
+        // DB::table('comments')->truncate();
 
         // Use the factory to create 10 fake records
         for ($i = 0; $i < 10; $i++) {
             $userId = DB::table('users')->inRandomOrder()->value('id');
-            DB::table('posts')->insert($this->getPostData($userId));
+            $postId = DB::table('posts')->inRandomOrder()->value('id');
+            DB::table('comments')->insert($this->getCommentData($userId, $postId));
         }
     }
 
-    private function getPostData($userId)
+    private function getCommentData($userId, $postId)
     {
         return [
             'user_id' => $userId,
-            'post_content' => fake()->paragraph,
-            'photo_path' => fake()->imageUrl(),
-            'post_views' => fake()->randomNumber(),
-            'likes' => fake()->randomNumber(),
-            'unlikes' => fake()->randomNumber(),
+            'post_id' => $postId,
+            'comment_content' => fake()->paragraph,
             'created_at' => now(),
             'updated_at' => now(),
         ];

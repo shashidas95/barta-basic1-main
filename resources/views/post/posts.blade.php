@@ -18,9 +18,9 @@
                     </div>
                 @endif
                 <!-- Content -->
-
+                {{-- {{ dd($result) }} --}}
                 <main class="container max-w-xl mx-auto space-y-8 mt-8 px-2 md:px-0 min-h-screen">
-                    @foreach ($users as $user)
+                    {{-- @foreach ($result as $data) --}}
                         <!-- Single post -->
                         <section id="newsfeed" class="space-y-6">
                             <article
@@ -31,7 +31,7 @@
                                     <div class="flex items-center justify-between">
                                         <div class="flex items-center space-x-3">
                                             <!-- User Avatar -->
-                                            <a href="{{ route('profile', ['id' => $user->id]) }}">
+                                            <a href="{{ route('profile', ['id' => $data->id]) }}">
                                                 <div class="flex-shrink-0">
                                                     <img class="h-10 w-10 rounded-full object-cover" src="#"
                                                         alt="Al Nahian" />
@@ -41,17 +41,17 @@
                                             <!-- User Info -->
                                             <div class="text-gray-900 flex flex-col min-w-0 flex-1">
                                                 <a href="profile.html" class="hover:underline font-semibold line-clamp-1">
-                                                    {{ $user->fname }}
+                                                    {{ $data->fname }}
                                                 </a>
 
                                                 <a href="profile.html"
                                                     class="hover:underline text-sm text-gray-500 line-clamp-1">
-                                                    {{ $user->email }}
+                                                    {{ $data->email }}
                                                 </a>
                                             </div>
                                             <!-- /User Info -->
                                         </div>
-                                        @if (auth()->check() && auth()->user()->id == $user->id)
+                                        @if (auth()->check() && auth()->user()->id == $data->id)
                                             <!-- Card Action Dropdown -->
                                             <div class="flex flex-shrink-0 self-center" x-data="{ open: false }">
                                                 <div class="relative inline-block text-left">
@@ -74,10 +74,10 @@
                                                         class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                                                         role="menu" aria-orientation="vertical"
                                                         aria-labelledby="user-menu-button" tabindex="-1">
-                                                        <a href="{{ route('post.edit', ['id' => $user->id]) }}"
+                                                        <a href="{{ route('post.edit', ['id' => $data->id]) }}"
                                                             class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                                                             role="menuitem" tabindex="-1" id="user-menu-item-0">Edit</a>
-                                                        <a href="{{ route('post.delete', ['id' => $post->id]) }}"
+                                                        <a href="{{ route('post.delete', ['id' => $data->id]) }}"
                                                             class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                                                             role="menuitem" tabindex="-1" id="user-menu-item-1">Delete</a>
                                                     </div>
@@ -90,28 +90,28 @@
 
                                 <!-- Content -->
                                 <div class="py-4 text-gray-700 font-normal">
-                                    <a href="{{ route('post.single-post', ['id' => $user->id]) }}">
+                                    <a href="{{ route('post.single-post', ['id' => $data->id]) }}">
                                         <img class="object-cover object-center w-full mb-8 lg:h-48 md:h-36 rounded-xl"
-                                            src="{{ asset('./images/' . $user->photo_path ?? 'https://via.placeholder.com/150') }}"
+                                            src="{{ asset('./images/' . $data->image ?? 'https://via.placeholder.com/150') }}"
                                             alt="blog">
                                     </a>
                                     <p>
                                         🎉🥳 Turning 20 today! 🎂
                                         <br />
-                                        {{ $user->content }}
+                                        {{ $data->post_content }}
                                         <a href="#laravel" class="text-black font-semibold hover:underline">#Laravel</a>
                                         <br />
                                         <br />
-                                        Keep me in your prayers 😌
+
                                     </p>
                                 </div>
 
                                 <!-- Date Created & View Stat -->
                                 <div class="flex items-center gap-2 text-gray-500 text-xs my-2">
                                     <span class="">
-                                        {{ \Carbon\Carbon::parse($user->updated_at)->diffForHumans() }}</span>
+                                        {{ \Carbon\Carbon::parse($data->updated_at)->diffForHumans() }}</span>
                                     <span class="">•</span>
-                                    <span>{{ $user->views }} views</span>
+                                    <span>{{ $data->views }} views</span>
                                 </div>
 
                                 <!-- Barta Card Bottom -->
@@ -191,7 +191,7 @@
                                 <!-- /Barta Card Bottom -->
                             </article>
                         </section>
-                    @endforeach
+                    {{-- @endforeach --}}
                     <!-- /Single post -->
                 </main>
             @endsection

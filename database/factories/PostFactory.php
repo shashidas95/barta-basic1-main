@@ -18,11 +18,12 @@ class PostFactory extends Factory
             'user_id' => function () {
                 return DB::table('users')->inRandomOrder()->value('id');
             },
-            'content' => fake()->paragraph,
+            'post_content' => fake()->paragraph,
             'photo_path' => fake()->imageUrl(),
-            'views' => fake()->randomNumber(),
+            'post_views' => fake()->randomNumber(),
             'likes' => fake()->randomNumber(),
             'unlikes' => fake()->randomNumber(),
+            'comments' => fake()->randomNumber(),
             'created_at' => now(),
             'updated_at' => now(),
         ];

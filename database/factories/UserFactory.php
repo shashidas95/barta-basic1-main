@@ -23,8 +23,8 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'fname' => fake()->name(),
-            'lname' => fake()->name(),
+            'name' => fake()->name(),
+            'username' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'is_admin' => fake()->boolean,
             'image' => fake()->imageUrl(),
@@ -37,6 +37,7 @@ class UserFactory extends Factory
         ];
 
     }
+        
 
     /**
      * Indicate that the model's email address should be unverified.

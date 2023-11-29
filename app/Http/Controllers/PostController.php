@@ -13,14 +13,18 @@ class PostController extends Controller
 {
     public function showPosts()
     {
-        $users = DB::table('users as u')
+
+        $result = DB::table('users as u')
             ->join('posts as p', 'u.id', '=', 'p.user_id')
-            ->select('u.*', 'p.*')
+            ->leftJoin('comments as c', 'p.id', '=', 'c.post_id')
+            ->select('u.*', 'p.*', 'c.*')
             ->get();
 
-        $posts = DB::table('posts')->get();
+        dd($result);
 
-        return view("post.posts", compact(["posts", "users"]));
+        // $posts = DB::table('posts')->get();
+        return view('post.posts', compact('result'));
+        // return view("post.posts", compact(["result", "posts"]));
     }
     public function showPost(Request $request)
     {
